@@ -1,4 +1,5 @@
-let btn=document.querySelector("button");
+let btn1=document.querySelector(".button1");
+let btn2=document.querySelector(".button2");
 let input=document.querySelector(".city");
 let cityName=document.querySelector(".cityName");
 let temp=document.querySelector(".temp");
@@ -8,21 +9,43 @@ let humidity=document.querySelector(".humidity");
 
 const apiKey="fc1e435e77da68dedc2b462f02ac8320";
 
-btn.addEventListener("click",getweather);
-document.addEventListener("keypress",function(e){
+btn1.addEventListener("click",function(){
+    const city=input.value;
+    getweather(`q=${city}`);
+});
+
+document.addEventListener("keydown",function(e){
     if (e.key=="Enter"){
-        getweather();
+        const city=input.value;
+        getweather(`q=${city}`);
     }
 })
 
-async function getweather(){
+btn2.addEventListener("click",getLocation);
+
+function getLocation(){
+    navigator.geolocation.getCurrentPosition(showWeatherByLocation);
+    console.log("working");
+}
+
+function showWeatherByLocation(position){
+    const lat=position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    console.log(lat);
+    let coordinates=`lat=${lat}&lon=${lon}`
+    getweather(coordinates);
+}
+
+async function getweather(query){
     try{
-        const city=input.value;
-        const url =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+       
+        const url =`https://api.openweathermap.org/data/2.5/weather?${query}&appid=${apiKey}&units=metric`;
 
         const response = await axios.get(url);
         const data = response.data;
 
+        console.log(data);
         cityName.textContent=data.name;
         temp.textContent=data.main.temp+"°C";
         condition.textContent=data.weather[0].description;
