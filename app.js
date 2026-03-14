@@ -7,6 +7,7 @@ let condition=document.querySelector(".condition");
 let wind=document.querySelector(".wind");
 let humidity=document.querySelector(".humidity");
 let loader=document.querySelector("#loader");
+let icon=document.querySelector(".icon")
 
 const apiKey="fc1e435e77da68dedc2b462f02ac8320";
 
@@ -45,8 +46,8 @@ async function getweather(query){
 
         const response = await axios.get(url);
         const data = response.data;
-
         console.log(data);
+        
         changeBackground(data.weather[0].main);
         cityName.textContent=data.name;
         temp.textContent=data.main.temp+"°C";
@@ -54,6 +55,14 @@ async function getweather(query){
         humidity.textContent=`Humidity: ${data.main.humidity}%`;
         wind.textContent=`wind speed: ${data.wind.speed} m/s`;
         loader.classList.add("hidden");
+        icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+        const url1 =`https://api.openweathermap.org/data/2.5/forecast?${query}&appid=${apiKey}&units=metric`;
+
+        const response1 = await axios.get(url1);
+        const data1 = response1.data;
+        console.log(data1);
+
     }
     
     catch(error){
