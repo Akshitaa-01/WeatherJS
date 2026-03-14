@@ -6,6 +6,7 @@ let temp=document.querySelector(".temp");
 let condition=document.querySelector(".condition");
 let wind=document.querySelector(".wind");
 let humidity=document.querySelector(".humidity");
+let loader=document.querySelector("#loader");
 
 const apiKey="fc1e435e77da68dedc2b462f02ac8320";
 
@@ -39,7 +40,7 @@ function showWeatherByLocation(position){
 
 async function getweather(query){
     try{
-       
+        loader.classList.remove("hidden");
         const url =`https://api.openweathermap.org/data/2.5/weather?${query}&appid=${apiKey}&units=metric`;
 
         const response = await axios.get(url);
@@ -51,10 +52,11 @@ async function getweather(query){
         condition.textContent=data.weather[0].description;
         humidity.textContent=`Humidity: ${data.main.humidity}%`;
         wind.textContent=`wind speed: ${data.wind.speed} m/s`;
-        
+        loader.classList.add("hidden");
     }
     
     catch(error){
+        loader.classList.add("hidden");
         alert("City not found or API error")
     }
 }
