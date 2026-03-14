@@ -9,21 +9,24 @@
     <title>WeatherJS</title>
 </head>
 <body>
-    <div id="loader" class="loader hidden"></div>
-    <h1>Weatherly</h1>
-    <div class="nav-bar">
-        <input type="text" class="city" placeholder="Enter your city...">
-        <button type="button" class="button1"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <button type="button" class="button2"><i class="fa-solid fa-location-dot"></i>Use precise location</button>
+    <div class="weather-card">
+        <div id="loader" class="loader hidden"></div>
+        <h1>Weatherly</h1>
+        <div class="nav-bar">
+            <input type="text" class="city" placeholder="Enter your city...">
+            <button type="button" class="button1"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button type="button" class="button2"><i class="fa-solid fa-location-dot"></i>Use precise location</button>
+        </div>
+        
+        <div class="weather-info">
+            <h2 class="cityName"></h2>
+            <h2 class="temp"></h2>
+            <p class="condition"></p>
+            <p class="humidity"></p>
+            <p class="wind "></p>
+        </div>
     </div>
     
-    <div class="weather">
-        <h2 class="cityName"></h2>
-        <h2 class="temp"></h2>
-        <p class="condition"></p>
-        <p class="humidity"></p>
-        <p class="wind "></p>
-    </div>
     <script src="./app.js"></script>
 </body>
 </html>

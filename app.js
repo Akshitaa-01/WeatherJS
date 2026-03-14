@@ -47,6 +47,7 @@ async function getweather(query){
         const data = response.data;
 
         console.log(data);
+        changeBackground(data.weather[0].main);
         cityName.textContent=data.name;
         temp.textContent=data.main.temp+"°C";
         condition.textContent=data.weather[0].description;
@@ -60,3 +61,25 @@ async function getweather(query){
         alert("City not found or API error")
     }
 }
+
+function changeBackground(weather){
+    if(weather === "Clear"){
+    document.body.style.background =
+    "linear-gradient(to top,#031035,#edf066)";
+    }
+
+    else if(weather === "Clouds"){
+    document.body.style.background =
+    "linear-gradient(to top,#d7d2cc,#304352)";
+    }
+
+    else if(weather === "Rain"){
+    document.body.style.background =
+    "linear-gradient(to top,#4b79a1,#283e51)";
+    }
+
+    else if(weather === "Snow"){
+    document.body.style.background =
+    "linear-gradient(to top,#e6dada,#274046)";
+    }
+ }
