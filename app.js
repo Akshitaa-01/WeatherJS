@@ -78,13 +78,15 @@ function displayForecastData(data1){
     forecast.innerHTML="";
     for (let i=0;i<5;i++){
         const fIcon=data1.list[i].weather[0].icon;
+        const fWeather=data1.list[i].weather[0].description;
         const fTemp=data1.list[i].main.temp;
         const date=new Date(data1.list[i].dt_txt);
         forecast.innerHTML+=`
             <div class="fday">
-                <p>${date.toDateString().slice(0,3)}</p>
+                <p clas="date" >${date.toDateString().slice(0,3)}</p>
                 <img class="ficon" src="https://openweathermap.org/img/wn/${fIcon}@2x.png"/>
                 <p>${Math.round(fTemp)}°C</p>
+                <p class="fWeather" >${fWeather}</p>
             </div>
             `;
             console.log(date);
