@@ -7,7 +7,8 @@ let condition=document.querySelector(".condition");
 let wind=document.querySelector(".wind");
 let humidity=document.querySelector(".humidity");
 let loader=document.querySelector("#loader");
-let icon=document.querySelector(".icon")
+let icon=document.querySelector(".icon");
+let forecast=document.querySelector(".forecastInfo");
 
 const apiKey="fc1e435e77da68dedc2b462f02ac8320";
 
@@ -42,27 +43,18 @@ function showWeatherByLocation(position){
 async function getweather(query){
     try{
         loader.classList.remove("hidden");
-        const url =`https://api.openweathermap.org/data/2.5/weather?${query}&appid=${apiKey}&units=metric`;
 
+        const url =`https://api.openweathermap.org/data/2.5/weather?${query}&appid=${apiKey}&units=metric`;
         const response = await axios.get(url);
         const data = response.data;
-        console.log(data);
-        
         changeBackground(data.weather[0].main);
-        cityName.textContent=data.name;
-        temp.textContent=data.main.temp+"°C";
-        condition.textContent=data.weather[0].description;
-        humidity.textContent=`Humidity: ${data.main.humidity}%`;
-        wind.textContent=`wind speed: ${data.wind.speed} m/s`;
-        loader.classList.add("hidden");
-        icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+        displayWeather(data);
+
 
         const url1 =`https://api.openweathermap.org/data/2.5/forecast?${query}&appid=${apiKey}&units=metric`;
-
         const response1 = await axios.get(url1);
         const data1 = response1.data;
-        console.log(data1);
-
+        displayForecastData(data1);
     }
     
     catch(error){
@@ -71,6 +63,35 @@ async function getweather(query){
     }
 }
 
+function displayWeather(data){
+    cityName.textContent=data.name;
+    temp.textContent=data.main.temp+"°C";
+    condition.textContent=data.weather[0].description;
+    humidity.textContent=`Humidity: ${data.main.humidity}%`;
+    wind.textContent=`wind speed: ${data.wind.speed} m/s`;
+    loader.classList.add("hidden");
+    icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+}
+
+function displayForecastData(data1){
+    forecast.innerHTML="";
+    for (let i=0;i<5;i++){
+        const fIcon=data1.list[i].weather[0].icon;
+        const fTemp=data1.list[i].main.temp;
+        const date=new Date(data1.list[i].dt_txt);
+        forecast.innerHTML+=`
+            <div class="fday">
+                <p>${date.toDateString().slice(0,3)}</p>
+                <img class="ficon" src="https://openweathermap.org/img/wn/${fIcon}@2x.png"/>
+                <p>${Math.round(fTemp)}°C</p>
+            </div>
+            `;
+            console.log(date);
+            console.log(date.toDateString());
+    }
+    console.log(data1);
+}
 function changeBackground(weather){
     if(weather === "Clear"){
     document.body.style.background =

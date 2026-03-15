@@ -1,7 +1,7 @@
 body{
     margin: 0px;
     background:linear-gradient(to top,#012646,#9feafd);
-    height: 100vh;
+    height: 150vh;
     display: flexbox;
     justify-content: center;
     align-items: center;
@@ -10,36 +10,38 @@ body{
 
 .weather-card{
 margin: auto;
-margin-top: 40px;
+margin-top: 20px;
 background:rgba(255,255,255,0.2);
 backdrop-filter:blur(10px);
 
-padding:30px;
+padding:15px;
 border-radius:20px;
 
-width:350px;
+width:550px;
 text-align:center;
 
 box-shadow:0 10px 30px rgba(201, 10, 10, 0.2);
 }
 .temp{
-font-size:60px;
+font-size:50px;
 margin:10px 0;
+margin-top: 5px;
 }
 
 .cityName{
-font-size:28px;
+font-size:22px;
+margin-bottom: 5px;
 }
 
 .condition{
-font-size:18px;
+font-size:16px;
 text-transform:capitalize;
 }
 
 .nav-bar{
 display:flex;
 gap:10px;
-margin-bottom:20px;
+margin-bottom:15px;
 }
 
 .city{
@@ -81,4 +83,30 @@ cursor:pointer;
 .hidden {
 display: none;
 }
+.forecastInfo{
 
+display:flex;
+justify-content:space-between;
+margin-top:0px;
+
+}
+
+.fday{
+
+text-align:center;
+background:rgba(255,255,255,0.2);
+padding:10px;
+border-radius:10px;
+width:80px;
+height: 160px;
+
+}
+.icon{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.ficon{
+    height: 60px;
+    width: 60px;
+
+}
